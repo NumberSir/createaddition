@@ -16,18 +16,18 @@ langs = [
     "ru_ru.json"
 ]
 
-with open(dir + "/../" + truth, 'r', encoding="utf8") as truthFile:
+with open(f"{dir}/../{truth}", 'r', encoding="utf8") as truthFile:
     truthJson = json.loads(truthFile.read())
     for lang in langs:
         newLang = {}
-        with open(dir + "/../" + lang, 'r', encoding="utf8") as currentFile:
+        with open(f"{dir}/../{lang}", 'r', encoding="utf8") as currentFile:
             langJson = json.loads(currentFile.read())
             for (key, truthValue) in truthJson.items():
                 newLang[key] = truthValue
                 if key in langJson:
-                    print("Key: " + key + " not in lang")
+                    print(f"Key: {key} not in lang")
                     newLang[key] = langJson[key]
-                    
-        with open(dir + "/../" + lang, 'w', encoding="utf8") as currentFile:
+
+        with open(f"{dir}/../{lang}", 'w', encoding="utf8") as currentFile:
             currentFile.write(json.dumps(newLang, ensure_ascii=False, indent="\t"))
 
